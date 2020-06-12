@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<meta http-equiv="refresh" content="1000">
+<meta http-equiv="Access-Control-Allow-Origin" content="*"/>
+<html lang="en">
+    <head>
+        <title>EFS File Browser</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+        <!-- <link rel="stylesheet" href="loader.css">
+        <link rel="stylesheet" href="./app.css"> -->
+        <!-- <link rel="icon" type="image/png" href="favicon.ico"> -->
+    </head>
+
+    <h1>EFS File Explorer</h1>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+        <script>
+            function parse(str) {
+                return JSON.stringify(JSON.parse(str), null, "\t");
+            }
+            //jQuery.support.cors = true;
+            $(document).ready(function(){
+            $("#beta").click(function(){
+                    $.ajax({
+                        type: "GET",
+                        url: "https://xxxxxxxx.execute-api.us-east-1.amazonaws.com/prod/filelist",
+                        dataType: "json",
+                        success: function(data) {
+                            console.log(data);
+                            $("#result").text(parse(data.body));
+                        }
+                    });
+                });
+            });
+        </script>
+        <pre id="result"></pre>
+        <div style="text-align:left">
+            <button type="button" class="btn btn-primary" id="beta">List Files in Folder</button>
+        </div>
+</html>
